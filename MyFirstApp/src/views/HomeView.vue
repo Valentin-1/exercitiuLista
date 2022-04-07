@@ -23,13 +23,14 @@ export default{
         },
       ],
       resultList: [],
-      show: false
+      show: null,
+      isVisibil: false,
     }
   },
   methods: {
-    openInfo(){
-      this.show = !this.show
-      
+    openInfo(id){
+      this.show = id
+      this.isVisibil = !this.isVisibil
     }
   }
 }
@@ -38,12 +39,12 @@ export default{
 <template>
   <div id="information">
     <ul>
-      <li v-for="item in infoList" :key="item.id" @click="openInfo()" >
+      <li v-for="item in infoList" :key="item.id" @click="openInfo(item.id)" >
         {{ item.nume }}
       </li>
     </ul>
     <div v-for="index in infoList" :key="index.nume">
-        <div v-show="this.show" >
+        <div v-show="show === index.id && this.isVisibil" >
           Phone: {{ index.phone }} <br/>
           Email: {{ index.email }}
         </div>
